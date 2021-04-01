@@ -17,6 +17,6 @@ module.exports = (type, message) => {
         : redBright(
             `[${moment().format("YYYY-DD-MM hh:mm:ss A")}] [${type}] ${message}`
         );
-
-    return console.log(log);
+    
+        return console.log(log);
 }

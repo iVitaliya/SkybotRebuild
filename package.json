@@ -29,7 +29,9 @@
     "erela.js": "^2.3.2",
     "erela.js-spotify": "^1.2.0",
     "hastebin.js": "^1.3.2",
+    "klaw": "^3.0.0",
     "moment": "^2.29.1",
+    "path": "^0.12.7",
     "qdatabase": "^3.8.1"
   }
 }

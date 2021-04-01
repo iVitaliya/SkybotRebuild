@@ -13,14 +13,14 @@ module.exports = class SkybotMemberFetcher {
         this.client = client;
     }
 
-    /** Resolver used for fetching the user
-     * @param {String} GuildMemberResolvable The resolvable for fetching the user.
+    /** Resolver used for fetching the member
+     * @param {String} GuildMemberResolvable The resolvable for fetching the member.
      * @param {Guild} guild The guild to seek the member in.
-     * @returns {GuildMember | null}
+     * @returns {GuildMember | Promise<GuildMember> | null}
      */
     async resolve(GuildMemberResolvable, guild) {
         if (typeof GuildMemberResolvable === 'string') continue;
-        else throw Log("Error", "The UserResolvable must be a type of a string!");
+        else throw Log("Error", "The GuildMemberResolvable must be a type of a string!");
 
         let Resolvable = await guild.members.cache.find(
             (usr) => usr.displayName === GuildMemberResolvable.toLowerCase() ||

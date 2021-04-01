@@ -14,8 +14,8 @@ module.exports = class SkybotUserFetcher {
     }
 
     /** Resolver used for fetching the user
-     * @param {String} UserResolvable
-     * @returns {User | null}
+     * @param {String} UserResolvable The resolvable for fetching the user.
+     * @returns {User | Promise<User> | null}
      */
     async resolve(UserResolvable) {
         if (typeof UserResolvable === 'string') continue;
