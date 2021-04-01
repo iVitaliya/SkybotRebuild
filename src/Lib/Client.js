@@ -7,6 +7,7 @@ const SkybotUserFetcher = require("./Fetchers/User"),
       SkybotGuildFetcher = require("./Fetchers/Guild");
 const SkybotEventHandler = require("./Handlers/Event");
 const SkybotCommandHandler = require("./Handlers/Command");
+const SkybotUtilities = require("./Core/Utils");
 const Logger = require("./Core/Logger");
 const Event = require("./Core/BaseEvent");
 
@@ -41,6 +42,7 @@ module.exports = class SkybotClient extends Client {
             channel: new SkybotChannelFetcher(this),
             guild: new SkybotGuildFetcher(this)
         };
+        this.utils = new SkybotUtilities(this);
         this.events = new SkybotEventHandler(this);
         this.commands = new SkybotCommandHandler(this);
         /** @type {Collection<string, Event>} */

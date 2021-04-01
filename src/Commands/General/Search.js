@@ -1,6 +1,7 @@
 const { Message } = require("discord.js");
 
 const BaseCommand = require("../../Lib/Core/BaseCommand");
+const Channelizer = require("../../Features/Channelizer");
 
 module.exports = class SearchCommand extends BaseCommand {
     constructor(client) {
@@ -8,25 +9,22 @@ module.exports = class SearchCommand extends BaseCommand {
             name: 'search',
             aliases: ['srch'],
             usages: [
-                'search user [UserID]',
-                'search member [Member]',
-                'search emoji [Emoji]',
-                'search role [Role]',
-                'search channel [Channel]'
+                'search member [Member] [Page?]',
+                'search emoji [Emoji] [Page?]',
+                'search role [Role] [Page?]',
+                'search channel [Channel] [Page?]'
             ],
             examples: [
-                'search user 114885555732348929',
-                'search member @Rowan',
-                'search emoji :hug:',
-                'search role @',
-                'search channel [Channel]'
+                'search member rowan 1',
+                'search emoji hug 1',
+                'search role member 1',
+                'search channel gen 1'
             ],
             args: [
-                '`[UserID]` - This can only be the ID of the user you\'d like to search for',
-                '`[Member]` - This can be the ID, the nickname, the username or the mention of the member',
-                '`[Emoji]` - This can be the ID, the name or the mention of the emoji',
-                '`[Role]` - This can be the ID, the name or the mention of the role',
-                '`[Channel]` - This can be the ID, the name or the mention of the channel'
+                '`[Member]` - This can be the username of the member',
+                '`[Emoji]` - This can be the name of the emoji',
+                '`[Role]` - This can be the name of the role',
+                '`[Channel]` - This can be the name of the channel'
             ],
             description: 'Searches for the given item.',
 
@@ -48,11 +46,30 @@ module.exports = class SearchCommand extends BaseCommand {
 
     /** @param {Message} message @param {Array<String>} args */
     async exec(message, args) {
-        if (!args[0]) {
-            const emb = new SkybotEmbed()
+        // if (!args[0]) {
+        //     const emb = new SkybotEmbed()
             
 
-            return this.client.sem(message,);
+        //     return this.client.sem(message,);
+        // }
+
+        const members = this.client.utils.results(message.guild.members.cache.filter((m) => m.user.username.toLowerCase().includes(args[1])).map((x) => `**${x.user.tag}** (${x.id})`), 8, args[2]);
+        const emojis = this.client.utils.results(message.guild.emojis.cache.filter((e) => e.name.toLowerCase().includes(args[1])).map((x) => `<:${x.name}:${x.id}> ${x.id}`), 8, args[2]);
+        const roles = this.client.utils.results(message.guild.roles.cache.filter((r) => r.name.toLowerCase().includes(args[1])).map((x) => `**@${x.name}** (${x.id})`), 8, args[2]);
+        const channels = this.client.utils.results(message.guild.channels.cache.filter((c) => c.name.toLowerCase().includes(args[1])).map((x) => `${Channelizer(x.type, x.name, x.id)}`), 8, args[2]);
+
+        /** @type {"member" | "emoji" | "role" | "channel"} */
+        const searchType;
+        const searchers = {
+            member: members,
+            emoji: emojis,
+            role: roles,
+            channel: channels
+        };
+
+        switch (searchType) {
+            case "member":
+                
         }
     }
 }
