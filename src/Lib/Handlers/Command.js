@@ -3,12 +3,8 @@ const {Collection} = require("discord.js");
 const klaw = require("klaw");
 
 const Cluster = require("../Client");
-const Command = require("../Core/BaseCommand");
 
-/** @type {Collection<String, Command>} */
-const col;
-
-module.exports = class SkybotCommandHandler extends col {
+module.exports = class SkybotCommandHandler extends Collection {
     /** @param {Cluster} client */
     constructor(client) {
         super();

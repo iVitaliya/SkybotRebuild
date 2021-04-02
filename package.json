@@ -32,6 +32,8 @@
     "klaw": "^3.0.0",
     "moment": "^2.29.1",
     "path": "^0.12.7",
-    "qdatabase": "^3.8.1"
+    "qdatabase": "^3.8.1",
+    "sqlite": "^4.0.21",
+    "vultrex.db": "^1.4.1"
   }
 }

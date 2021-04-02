@@ -5,10 +5,7 @@ const klaw = require("klaw");
 const Cluster = require("../Client");
 const Event = require("../Core/BaseEvent");
 
-/** @type {Collection<String, Event>} */
-const col;
-
-module.exports = class SkybotEventHandler extends col {
+module.exports = class SkybotEventHandler extends Collection {
     /** @param {Cluster} client */
     constructor(client) {
         super();

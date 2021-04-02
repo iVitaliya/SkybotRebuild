@@ -1,4 +1,5 @@
 const { GuildMember } = require("discord.js");
+const axios = require("axios").default;
 
 const Cluster = require("../Client");
 
@@ -101,10 +102,25 @@ module.exports = class Utilities {
      * @param {Number} itemsPerPage
      * @param {Number} page
      */
-    results(arr, itemsPerPage, page = 1) {
+    pages(arr, itemsPerPage, page = 1) {
         const maxPages = Math.ceil(arr.length / itemsPerPage);
         if (page < 1 || page > maxPages) return null;
         
-        return arr.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+        return {
+            data: arr.slice((page - 1) * itemsPerPage, page * itemsPerPage),
+            max: maxPages
+        };
+    }
+
+    /**
+     * @param {"tickle" | "slap" | "poke" | "pat" | "neko" | "meow" | "lizard" | "kiss" | "hug" | "feed" | "cuddle" | "why" | "cat" | "fact" | "8ball" | "snug" | "waifu" | "avatar"} gifType
+     */
+    async getGIF(gifType) {
+        const url = `https://nekos.life/api/v2/img/${gifType}`;
+        const res = await axios.get(url);
+
+        if (!res) return "Uknown";
+        
+        return res;
     }
 }

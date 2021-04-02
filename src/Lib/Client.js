@@ -49,8 +49,11 @@ module.exports = class SkybotClient extends Client {
         this.aliases = new Collection();
     }
 
-    start() {
-        this.commands.init();
+    /** @param {String | *} token */
+    async start(token) {
         this.events.init();
+        this.commands.init();
+        
+        return await this.login(token);
     }
 }

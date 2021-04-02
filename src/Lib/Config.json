@@ -1,0 +1,15 @@
+{
+    "_token": "NzU4MDYxNTM4OTYyNTcxMzY1.X2pd0g.s5NejoV_y16_6w2acGfBOgaFoO0",
+    "defaultPrefix": "s.",
+    "spotify": {
+        "clientSecret": "",
+        "clientID": ""
+    },
+    "nodes": [
+        {
+            "host": "localhost",
+            "port": 2333,
+            "password": "youshallnotpass"
+        }
+    ]
+}

@@ -6,7 +6,7 @@ const Log = require("../Core/Logger");
 const { GuildChannel, Guild } = require("discord.js");
 
 /** @type {"store" | "news" | "category" | "text" | "voice"} */
-const ChannelTypes; 
+let ChannelTypes; 
 
 module.exports = class SkybotChannelFetcher {
     /** @param {Cluster} client */
@@ -44,10 +44,7 @@ module.exports = class SkybotChannelFetcher {
      * @param {Guild} guild The guild to seek the member in.
      * @returns {GuildChannel | Promise<GuildChannel> | String | null}
      */
-    strictResolve(ChannelResolvable, ChannelTypes, guild) {
-        if (typeof ChannelResolvable === 'string') continue;
-        else throw Log("Error", "The ChannelResolvable must be a type of a string!");
-
+    async strictResolve(ChannelResolvable, ChannelTypes, guild) {
         let Resolvable = await guild.channels.cache.find(
             (ch) => ch.name.toLowerCase() === ChannelResolvable.toLowerCase() ||
                 ch.id === ChannelResolvable.replace(/[\\<>#]/g, "")
